@@ -155,7 +155,8 @@ func (r *ReconcileExamplekind) Reconcile(request reconcile.Request) (reconcile.R
 	// Update status.PodNames if needed
 	if !reflect.DeepEqual(podNames, instance.Status.PodNames) {
 		instance.Status.PodNames = podNames
-		err := r.client.Update(context.TODO(), instance)
+		//err := r.client.Update(context.TODO(), instance)
+		err := r.client.Status().Update(context.TODO(), instance)
 		if err != nil {
 			log.Printf("failed to update node status: %v", err)
 			return reconcile.Result{}, err
